@@ -1,24 +1,40 @@
-# build output
+# Build output
 dist/
-# generated types
-.astro/
+dist-ssr/
 
-# dependencies
+# Astro generated files
+.astro/
+.vercel/
+.netlify/
+
+# Dependencies
 node_modules/
 
-# logs
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+bun-debug.log*
 
-
-# environment variables
+# Environment variables
 .env
 .env.production
+.env.local
+.env.*.local
 
-# macOS-specific files
+# OS files
 .DS_Store
+Thumbs.db
 
-# jetbrains setting folder
+# TypeScript
+*.tsbuildinfo
+
+# IDEs
 .idea/
+.vscode/*.log
+.vscode/project-configs.json
+
+# Angular specific (AnalogJS)
+.analog/
+dist/out-tsc
