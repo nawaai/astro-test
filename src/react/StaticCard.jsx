@@ -6,7 +6,7 @@ export default function ReactStaticCard({ title, message }) {
     <div>
       <h3>{title}</h3>
       <p>{message}</p>
-      <small>Rendered statically with React</small>
+      <small>Rendered with Original React (Static SSR)</small>
     </div>
   );
 }

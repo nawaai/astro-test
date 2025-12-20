@@ -1,0 +1,14 @@
+---
+const { title, message } = Astro.props;
+---
+
+<div x-data="{ open: false }" style="border: 1px solid orange; padding: 1rem; margin-top: 1rem;">
+  <h3>{title}</h3>
+  <p>{message}</p>
+  <button @click="open = !open" style="cursor: pointer;">
+    Toggle Alpine Detail
+  </button>
+  <div x-show="open" x-transition style="margin-top: 0.5rem; font-size: 3rem;">
+    <small>Rendered via Astro with Alpine.js interaction</small>
+  </div>
+</div>
