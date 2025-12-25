@@ -3,8 +3,6 @@
 // Reference: https://overreacted.io/rsc-for-astro-developers
 
 import ServerCard from '../react/ServerCard.jsx';
-import RefreshButton from '../react/RefreshButton.jsx';
-import ClientFact from '../react/ClientFact.jsx';
 import ClientCounter from '../react/ClientCounter.jsx';
 
 // Server-side data fetching (runs at BUILD TIME for static output)
@@ -73,36 +71,26 @@ const factData = await response.json();
 			</div>
 		</div>
 
-		<h2>Live Demo: Data Fetching</h2>
+		<h2>Live Demo</h2>
 
-		<h3>1. Server Fetch + Page Reload</h3>
-		<p>Data fetched on server, refresh triggers page reload:</p>
-		<ServerCard fact={factData.text} source={factData.source_url}>
-			<RefreshButton client:load />
-		</ServerCard>
+		<h3>1. Server Component with API Fetch</h3>
+		<p>Data fetched from <code>uselessfacts.jsph.pl</code> at build/request time:</p>
+		<!-- No client directive = Server Component equivalent -->
+		<ServerCard fact={factData.text} source={factData.source_url} />
 
-		<h3>2. Client Fetch (No Reload)</h3>
-		<p>Initial data from server, refetch happens on client:</p>
-		<ClientFact client:load initialFact={factData.text} initialSource={factData.source_url} />
-
-		<h2>Interactive Component</h2>
-		<h3>3. Client Counter</h3>
+		<h3>2. Client Component (Interactive)</h3>
+		<!-- client:load = "use client" equivalent -->
 		<ClientCounter client:load initialCount={0} />
 
 		<h2>How It Works</h2>
-		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>{`// Server-side fetch (in Astro frontmatter)
-const response = await fetch('https://uselessfacts.jsph.pl/...');
+		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>{`// In Astro frontmatter (server-side):
+const response = await fetch('https://uselessfacts.jsph.pl/api/v2/facts/random');
 const factData = await response.json();
 
-// Option 1: Server Component + tiny client island for refresh
-<ServerCard fact={factData.text} source={factData.source_url}>
-  <RefreshButton client:load />  // Only button is hydrated
-</ServerCard>
+// Server Component - no client:* directive
+<ServerCard fact={factData.text} source={factData.source_url} />
 
-// Option 2: Full client component with client-side fetch
-<ClientFact client:load initialFact={factData.text} ... />
-
-// Option 3: Pure client interactivity
+// Client Component - with client:load directive
 <ClientCounter client:load initialCount={0} />`}</code></pre>
 
 		<h2>Key Differences</h2>
