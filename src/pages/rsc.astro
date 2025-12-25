@@ -2,11 +2,14 @@
 // RSC Pattern Demo in Astro
 // Reference: https://overreacted.io/rsc-for-astro-developers
 
+// SSR mode - fetch fresh data on each request (not build time)
+export const prerender = false;
+
 import ServerCard from '../react/ServerCard.jsx';
 import ClientCounter from '../react/ClientCounter.jsx';
 
-// Server-side data fetching (runs at BUILD TIME for static output)
-// For fresh data, use the ClientFact component which fetches on client
+// Server-side data fetching (like RSC async server components)
+// With prerender=false, this runs on EACH REQUEST (true SSR)
 const response = await fetch('https://uselessfacts.jsph.pl/api/v2/facts/random');
 const factData = await response.json();
 ---
