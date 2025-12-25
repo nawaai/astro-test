@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
 import preact from '@astrojs/preact';
 import react from '@astrojs/react';
@@ -11,6 +12,7 @@ import lit from '@astrojs/lit';
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: node({ mode: 'standalone' }), // Required for SSR pages
   integrations: [
     react({ include: ['**/react/*'] }),
     preact({ include: ['**/preact/*'] }),
