@@ -1,4 +1,7 @@
 ---
+// Force static prerender - Lit uses HTMLElement which isn't available in Workers
+export const prerender = true;
+
 import '../lit/StaticCard.js';
 ---
 

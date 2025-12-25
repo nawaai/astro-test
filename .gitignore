@@ -7,13 +7,9 @@ dist-ssr/
 .vercel/
 .netlify/
 
-# Next.js
-.next/
-next-env.d.ts
-
-# Public folder (generated from Astro build)
-public/*
-!public/.gitkeep
+# Cloudflare
+.wrangler/
+_worker.js
 
 # Dependencies
 node_modules/

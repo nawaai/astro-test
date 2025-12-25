@@ -4,12 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && cp -r dist/* public/ && next build",
+    "build": "astro build && node scripts/fix-ssr-routes.js",
     "preview": "astro preview",
     "astro": "astro"
-  },
-  "devDependencies": {
-    "next": "^15.5.0"
   },
   "dependencies": {
     "@analogjs/astro-angular": "^2.2.0",
@@ -24,8 +21,8 @@
     "@angular/platform-browser": "^21.0.6",
     "@angular/platform-server": "^21.0.6",
     "@astrojs/alpinejs": "^0.4.9",
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/lit": "^4.3.0",
-    "@astrojs/node": "^9.5.1",
     "@astrojs/preact": "^4.1.3",
     "@astrojs/react": "^4.4.2",
     "@astrojs/solid-js": "^5.1.3",
