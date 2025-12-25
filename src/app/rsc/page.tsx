@@ -20,7 +20,7 @@ export default async function RSCPage() {
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
       <h1>React Server Components Demo</h1>
-      <p><a href="/">← Back to Home</a></p>
+      <p><a href="/">← Back to Home</a> | <a href="/islands">→ See Astro Islands</a></p>
 
       <div style={{ background: '#fffbe6', borderLeft: '4px solid #ffe58f', padding: '1rem', margin: '1rem 0' }}>
         <strong>Key Insight:</strong> This is a real Next.js RSC page.
@@ -59,24 +59,24 @@ export default async function RSCPage() {
 
       <h2>How It Works</h2>
       <pre style={{ background: '#1e1e1e', color: '#d4d4d4', padding: '1rem', borderRadius: '8px', overflow: 'auto' }}>
-{`// Server Component (default in App Router)
-async function getRandomFact() {
-  const res = await fetch('https://...', { cache: 'no-store' });
-  return res.json();
-}
-
-export default async function RSCPage() {
-  const fact = await getRandomFact(); // Runs on server!
-  return <ServerCard fact={fact.text} />;
-}
-
-// Client Component (has "use client")
-'use client';
-import { useState } from 'react';
-export function ClientCounter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
-}`}
+        <code>
+          <span style={{ color: '#6a9955' }}>{'// Server Component (default in App Router)'}</span>{'\n'}
+          <span style={{ color: '#c586c0' }}>async function</span> <span style={{ color: '#dcdcaa' }}>getRandomFact</span>() {'{'}{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>const</span> <span style={{ color: '#9cdcfe' }}>res</span> = <span style={{ color: '#c586c0' }}>await</span> <span style={{ color: '#dcdcaa' }}>fetch</span>(<span style={{ color: '#ce9178' }}>'https://...'</span>, {'{'} <span style={{ color: '#9cdcfe' }}>cache</span>: <span style={{ color: '#ce9178' }}>'no-store'</span> {'}'});{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>return</span> <span style={{ color: '#9cdcfe' }}>res</span>.<span style={{ color: '#dcdcaa' }}>json</span>();{'\n'}
+          {'}'}{'\n\n'}
+          <span style={{ color: '#c586c0' }}>export default async function</span> <span style={{ color: '#dcdcaa' }}>RSCPage</span>() {'{'}{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>const</span> <span style={{ color: '#9cdcfe' }}>fact</span> = <span style={{ color: '#c586c0' }}>await</span> <span style={{ color: '#dcdcaa' }}>getRandomFact</span>(); <span style={{ color: '#6a9955' }}>{'// Runs on server!'}</span>{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>return</span> {'<'}<span style={{ color: '#4ec9b0' }}>ServerCard</span> <span style={{ color: '#9cdcfe' }}>fact</span>={'{'}fact.text{'}'} /{'>'};{'\n'}
+          {'}'}{'\n\n'}
+          <span style={{ color: '#6a9955' }}>{'// Client Component (has "use client")'}</span>{'\n'}
+          <span style={{ color: '#ce9178' }}>'use client'</span>;{'\n'}
+          <span style={{ color: '#c586c0' }}>import</span> {'{'} <span style={{ color: '#9cdcfe' }}>useState</span> {'}'} <span style={{ color: '#c586c0' }}>from</span> <span style={{ color: '#ce9178' }}>'react'</span>;{'\n'}
+          <span style={{ color: '#c586c0' }}>export function</span> <span style={{ color: '#dcdcaa' }}>ClientCounter</span>() {'{'}{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>const</span> [<span style={{ color: '#9cdcfe' }}>count</span>, <span style={{ color: '#9cdcfe' }}>setCount</span>] = <span style={{ color: '#dcdcaa' }}>useState</span>(0);{'\n'}
+          {'  '}<span style={{ color: '#c586c0' }}>return</span> {'<'}<span style={{ color: '#4ec9b0' }}>button</span> <span style={{ color: '#9cdcfe' }}>onClick</span>={'{'}() ={'>'} setCount(c ={'>'} c + 1){'}'}{'>'}{'{'}count{'}'}{'{'}{'<'}/<span style={{ color: '#4ec9b0' }}>button</span>{'>'};{'\n'}
+          {'}'}
+        </code>
       </pre>
 
       <p style={{ marginTop: '2rem', color: '#666' }}>

@@ -1,0 +1,112 @@
+---
+// Astro Islands Architecture Demo
+// Reference: https://docs.astro.build/en/concepts/islands/
+
+import ClientFact from '../react/ClientFact.jsx';
+import ClientCounter from '../react/ClientCounter.jsx';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Astro Islands</title>
+		<style>
+			body {
+				font-family: system-ui, sans-serif;
+				max-width: 800px;
+				margin: 2rem auto;
+				padding: 0 1rem;
+			}
+			.comparison {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin: 2rem 0;
+			}
+			@media (max-width: 600px) {
+				.comparison { grid-template-columns: 1fr; }
+			}
+			code {
+				background: #f0f0f0;
+				padding: 0.2em 0.4em;
+				border-radius: 3px;
+			}
+			.note {
+				background: #fffbe6;
+				border-left: 4px solid #ffe58f;
+				padding: 1rem;
+				margin: 1rem 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Astro Islands</h1>
+		<p><a href="/">← Back to Home</a> | <a href="/rsc">→ See Next.js RSC (SSR)</a></p>
+
+		<div class="note">
+			<strong>Key Insight:</strong> Astro Islands let you add interactive components to static HTML.
+			Components hydrate independently - only the interactive parts ship JavaScript!
+		</div>
+
+		<h2>The Pattern</h2>
+		<div class="comparison">
+			<div>
+				<h4>RSC Terminology</h4>
+				<ul>
+					<li><code>"use server"</code> → Server Component</li>
+					<li><code>"use client"</code> → Client Component</li>
+				</ul>
+			</div>
+			<div>
+				<h4>Astro Equivalent</h4>
+				<ul>
+					<li>No directive → Server-only (0 JS)</li>
+					<li><code>client:load</code> → Hydrated Island</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Live Demo</h2>
+
+		<h3>1. Client Component with API Fetch</h3>
+		<p>Data fetched from <code>uselessfacts.jsph.pl</code> on client-side:</p>
+		<!-- client:load = "use client" equivalent - fetches fresh data! -->
+		<ClientFact client:load />
+
+		<h3>2. Client Component (Interactive)</h3>
+		<!-- client:load = "use client" equivalent -->
+		<ClientCounter client:load initialCount={0} />
+
+		<h2>How It Works</h2>
+		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow: auto;"><code><span style="color: #6a9955;">// ClientFact.jsx - Client Component with data fetching</span>
+<span style="color: #c586c0;">import</span> <span style="color: #9cdcfe;">{"{"} useState, useEffect {"}"}</span> <span style="color: #c586c0;">from</span> <span style="color: #ce9178;">'react'</span>;
+
+<span style="color: #c586c0;">export default function</span> <span style="color: #dcdcaa;">ClientFact</span>() {"{"}
+  <span style="color: #c586c0;">const</span> [<span style="color: #9cdcfe;">fact</span>, <span style="color: #9cdcfe;">setFact</span>] = <span style="color: #dcdcaa;">useState</span>(<span style="color: #569cd6;">null</span>);
+
+  <span style="color: #dcdcaa;">useEffect</span>(() => {"{"}
+    <span style="color: #dcdcaa;">fetch</span>(<span style="color: #ce9178;">'https://uselessfacts.jsph.pl/...'</span>)
+      .<span style="color: #dcdcaa;">then</span>(<span style="color: #9cdcfe;">r</span> => <span style="color: #9cdcfe;">r</span>.<span style="color: #dcdcaa;">json</span>())
+      .<span style="color: #dcdcaa;">then</span>(<span style="color: #9cdcfe;">setFact</span>);
+  {"}"}, []);
+
+  <span style="color: #c586c0;">return</span> &lt;<span style="color: #4ec9b0;">div</span>&gt;{"{"}fact?.text{"}"}&lt;/<span style="color: #4ec9b0;">div</span>&gt;;
+{"}"}
+
+<span style="color: #6a9955;">// In Astro template:</span>
+&lt;<span style="color: #4ec9b0;">ClientFact</span> <span style="color: #9cdcfe;">client:load</span> /&gt;
+&lt;<span style="color: #4ec9b0;">ClientCounter</span> <span style="color: #9cdcfe;">client:load</span> <span style="color: #9cdcfe;">initialCount</span>={"{"}0{"}"} /&gt;</code></pre>
+
+		<h2>Key Differences</h2>
+		<ul>
+			<li><strong>Astro:</strong> Multi-framework (React, Vue, Svelte, etc.) with Islands</li>
+			<li><strong>RSC:</strong> React-only, but with seamless server/client boundary</li>
+			<li><strong>Astro:</strong> Explicit <code>client:*</code> directives for hydration</li>
+			<li><strong>RSC:</strong> <code>"use client"</code> directive at file level</li>
+		</ul>
+
+		<p style="margin-top: 2rem; color: #666;">
+			<small>Reference: <a href="https://docs.astro.build/en/concepts/islands/" target="_blank">Astro Islands Documentation</a></small>
+		</p>
+	</body>
+</html>
