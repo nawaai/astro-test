@@ -8,8 +8,10 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "devDependencies": {
+    "next": "^15.5.0"
+  },
   "dependencies": {
-    "next": "^15.5.0",
     "@analogjs/astro-angular": "^2.2.0",
     "@analogjs/vite-plugin-angular": "^2.2.0",
     "@angular/animations": "^21.0.6",
