@@ -11,6 +11,14 @@ dist-ssr/
 .wrangler/
 _worker.js
 
+# Next.js
+.next/
+next-env.d.ts
+
+# Public folder (generated from Astro build)
+public/*
+!public/.gitkeep
+
 # Dependencies
 node_modules/
 

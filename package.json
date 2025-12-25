@@ -4,9 +4,13 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/fix-ssr-routes.js",
+    "dev:next": "next dev",
+    "build": "astro build && node scripts/copy-to-public.js && next build",
     "preview": "astro preview",
     "astro": "astro"
+  },
+  "devDependencies": {
+    "next": "^15.5.0"
   },
   "dependencies": {
     "@analogjs/astro-angular": "^2.2.0",
