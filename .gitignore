@@ -44,6 +44,7 @@ Thumbs.db
 
 # IDEs
 .idea/
+.vscode/
 .vscode/*.log
 .vscode/project-configs.json
 
